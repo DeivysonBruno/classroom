@@ -1,0 +1,59 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package solucao;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+import problema.ProblemaSchwefel;
+
+/**
+ *
+ * @author fernando
+ */
+public abstract class Populacao<T> {
+
+    ArrayList<Individuo<T>> individuos = new ArrayList<>();
+    int tamanho;
+    ProblemaSchwefel problema;
+
+    public ArrayList<Individuo<T>> getIndividuos() {
+        return individuos;
+    }
+
+    public void setIndividuos(ArrayList<Individuo<T>> individuos) {
+        this.individuos = individuos;
+    }
+
+    public int getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(int tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public ProblemaSchwefel getProblema() {
+        return problema;
+    }
+
+    public void setProblema(ProblemaSchwefel problema) {
+        this.problema = problema;
+    }
+    
+    public void avaliar() {
+        for(Individuo individuo : this.individuos) {
+            this.problema.calcularFuncaoObjetivo((IndividuoDouble) individuo);
+        }
+    }
+    
+    public Individuo getMelhorIndividuo() {
+        return Collections.min(this.individuos);
+    }    
+
+    abstract void criar();
+    
+}
